@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Twelve Data API</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+        <h1>Twelve Data API</h1>
+        <p>Use the interactive charts below to explore the dataset</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <div id="data"></div>
+        <div class="well">
+          <h5>Stock Symbol:</h5>
+          <select id="selDataset2" onchange="fetchEarningsData(this.value)">
+            <option value="">Select a stock</option>
+          </select>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Demographic Info</h3>
+          </div>
+          <div id="sample-metadata" class="panel-body"></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h3>Annual Earnings:</h3>
+            <div id="annualEarningsChart"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h3>Quarterly Earnings:</h3>
+            <div id="quarterlyEarningsChart"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+            <div class ="col-md-12 text-center">
+                <h3>Line Chart:</h3>
+                <div id="myDiv"></div>
+            </div>
+        </div>
+      </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const data = null;
+
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = false;
+
+    xhr.addEventListener('readystatechange', function () {
+      if (this.readyState === this.DONE) {
+        const response = JSON.parse(this.responseText);
+        const stocks = response.data;
+
+        const dropdown = document.getElementById('selDataset2');
+
+        stocks.forEach(stock => {
+          const option = document.createElement('option');
+          option.value = stock.symbol;
+          option.textContent = `${stock.name} (${stock.symbol})`;
+          dropdown.appendChild(option);
+        });
+      }
+    });
+
+    xhr.open('GET', 'https://twelve-data1.p.rapidapi.com/stocks?exchange=NASDAQ&format=json');
+    xhr.setRequestHeader('X-RapidAPI-Key', '11f7a923e1msh3c8c61e1bef42dcp1a3bf6jsn7810d3eb53c7');
+    xhr.setRequestHeader('X-RapidAPI-Host', 'twelve-data1.p.rapidapi.com');
+
+    xhr.send(data);
+
+    function fetchEarningsData(symbol) {
+      if (!symbol) return; // If no symbol is selected, return
+
+      const apiKey = 'YIVV78G5N35Z9YN0';
+      const annualUrl = `https://www.alphavantage.co/query?function=EARNINGS&symbol=${symbol}&apikey=${apiKey}`;
+      const quarterlyUrl = `https://www.alphavantage.co/query?function=EARNINGS&symbol=${symbol}&apikey=${apiKey}`;
+
+      fetch(annualUrl)
+        .then(response => {
+        if (!response.ok) {
+        throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+        console.log(data);
+
+    const annualEarnings = data.annualEarnings;
+    const quarterlyEarnings = data.quarterlyEarnings;
+
+    // Process annual earnings data
+    const fiscalDateEndingsAnnual = [];
+    const earningsValuesAnnual = [];
+
+    annualEarnings.forEach(entry => {
+      fiscalDateEndingsAnnual.push(entry.fiscalDateEnding);
+      earningsValuesAnnual.push(entry.reportedEPS);
+    });
+
+    const traceAnnual = {
+      x: fiscalDateEndingsAnnual.map(date => date.substring(0, 4)), // Extracting only the year from the fiscal date ending
+      y: earningsValuesAnnual,
+      type: 'bar',
+      marker: {
+        color: 'blue'
+      },
+      text: earningsValuesAnnual.map(eps => `Reported EPS: ${eps}`)
+    };
+
+    const layoutAnnual = {
+      title: 'Annual Earnings',
+      xaxis: {
+        title: 'Year'
+      },
+      yaxis: {
+        title: 'Earnings (USD)'
+      }
+    };
+
+    const chartDataAnnual = [traceAnnual];
+    Plotly.newPlot('annualEarningsChart', chartDataAnnual, layoutAnnual);
+
+    // Process quarterly earnings data
+    const reportedDateQuarterly = [];
+    const reportedEPSQuarterly = [];
+
+    quarterlyEarnings.forEach(entry => {
+      reportedDateQuarterly.push(entry.reportedDate);
+      reportedEPSQuarterly.push(entry.reportedEPS);
+    });
+
+    const traceQuarterly = {
+      x: reportedDateQuarterly.map(date => date.substring(0, 4)), // Extracting only the year from the fiscal date ending
+      y: reportedEPSQuarterly,
+      type: 'bar',
+      marker: {
+        color: 'green'
+      },
+      text: reportedEPSQuarterly.map(eps => `Reported EPS: ${eps}`)
+    };
+
+    const layoutQuarterly = {
+      title: 'Quarterly Earnings',
+      xaxis: {
+        title: 'Year'
+      },
+      yaxis: {
+        title: 'Earnings (USD)'
+      }
+    };
+
+    const chartDataQuarterly = [traceQuarterly];
+    Plotly.newPlot('quarterlyEarningsChart', chartDataQuarterly, layoutQuarterly);
+
+    // Process combined data for line chart
+    const traceAE = {
+      type: 'scatter',
+      x: fiscalDateEndingsAnnual.map(date => date.substring(0, 4)),
+      y: earningsValuesAnnual,
+      mode: 'lines',
+      name: 'Annual Earnings',
+      line: {
+        color: 'rgb(219,64,82)',
+        width: 3
+      }
+    };
+
+    const traceQE = {
+      type: 'scatter',
+      x: reportedDateQuarterly.map(date => date.substring(0, 4)),
+      y: reportedEPSQuarterly,
+      mode: 'lines',
+      name: 'Quarterly Earnings',
+      line: {
+        color: 'rgb(55,128,191)',
+        width: 1
+      }
+    };
+
+    const layoutCombined = {
+      title: 'Combined Earnings',
+      xaxis: {
+        title: 'Year'
+      },
+      yaxis: {
+        title: 'Earnings (USD)'
+      }
+    };
+
+    const chartDataCombined = [traceAE, traceQE];
+    Plotly.newPlot('myDiv', chartDataCombined, layoutCombined);
+
+  })
+  .catch(error => {
+    console.error('There was a problem with the earnings fetch operation:', error);
+  });
+
+
+
+
+    }
+  </script>
+
+</body>
+
+</html>
