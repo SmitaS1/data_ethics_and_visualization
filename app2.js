@@ -1,21 +1,22 @@
-import axios from 'axios';
 
-const options = {
-  method: 'GET',
-  url: 'https://twelve-data1.p.rapidapi.com/symbol_search',
-  params: {
-    symbol: 'AA',
-    outputsize: '30'
-  },
-  headers: {
-    'X-RapidAPI-Key': '11f7a923e1msh3c8c61e1bef42dcp1a3bf6jsn7810d3eb53c7',
-    'X-RapidAPI-Host': 'twelve-data1.p.rapidapi.com'
-  }
-};
 
-try {
-	const response = await axios.request(options);
-	console.log(response.data);
-} catch (error) {
-	console.error(error);
-}
+var url = 'https://www.alphavantage.co/query?function=EARNINGS&symbol=IBM&apikey=24B0JWGHHKVJZPXU';
+
+
+fetch(url)
+  .then(response => {
+    // Check if the request was successful
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    // Parse the JSON response
+    return response.json();
+  })
+  .then(data => {
+    // Handle the data returned from the server
+    console.log(data);
+  })
+  .catch(error => {
+    // Handle any errors that occurred during the fetch
+    console.error('There was a problem with the fetch operation:', error);
+  });

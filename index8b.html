@@ -63,6 +63,26 @@
           </div>
         </div>
       </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h3>Bubble Chart:</h3>
+            <div id="annualEarningsChart Bubble"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h3>Bubble Chart:</h3>
+            <div id="quarterlyEarningsChart Bubble"></div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
   </div>
 
@@ -119,6 +139,7 @@ function fetchEarningsData() {
     .then(data => {
       console.log(data);
 
+
       const annualEarnings = data.annualEarnings;
       const quarterlyEarnings = data.quarterlyEarnings;
 
@@ -154,6 +175,29 @@ function fetchEarningsData() {
       const chartDataAnnual = [traceAnnual];
       Plotly.newPlot('annualEarningsChart', chartDataAnnual, layoutAnnual);
 
+      const traceAnnualB = {
+        x: fiscalDateEndingsAnnual.map(date => date.substring(0, 4)),
+        y: earningsValuesAnnual,
+        text: fiscalDateEndingsAnnual.map(eps => `Reported EPS: ${eps}`),
+        mode: 'markers',
+        marker: {
+          size: earningsValuesAnnual,
+          color: fiscalDateEndingsAnnual.map(date => date.substring(0, 4))
+        }
+      };
+
+      const layoutAnnualB = {
+        title: 'Annual Earnings',
+        xaxis: { title: 'Year' },
+        yaxis: { title: 'Earnings (USD)' },
+        height: 600,
+        width: 1200
+      };
+
+      Plotly.newPlot("annualEarningsChart Bubble", [traceAnnualB], layoutAnnualB);
+
+      
+
       // Process quarterly earnings data
       const reportedDateQuarterly = [];
       const reportedEPSQuarterly = [];
@@ -186,8 +230,30 @@ function fetchEarningsData() {
       const chartDataQuarterly = [traceQuarterly];
       Plotly.newPlot('quarterlyEarningsChart', chartDataQuarterly, layoutQuarterly);
 
-      // Process combined data for line chart
-      const traceAE = {
+
+      const traceQuarterlyB = {
+        x: reportedDateQuarterly.map(date => date.substring(0, 4)),
+        y: reportedEPSQuarterly,
+        text: reportedDateQuarterly.map(eps => `Reported EPS: ${eps}`),
+        mode: 'markers',
+        marker: {
+          size: reportedEPSQuarterly,
+          color: reportedDateQuarterly.map(date => date.substring(0, 4))
+        }
+      };
+
+      const layoutQuarterlyB = {
+        title: 'Quarterly Earnings',
+        xaxis: { title: 'Year' },
+        yaxis: { title: 'Earnings (USD)' },
+        height: 600,
+        width: 1200
+      };
+
+      Plotly.newPlot("quarterlyEarningsChart Bubble", [traceQuarterlyB], layoutQuarterlyB);
+    
+
+    const traceAE = {
         type: 'scatter',
         x: fiscalDateEndingsAnnual.map(date => date.substring(0, 4)),
         y: earningsValuesAnnual,
@@ -206,7 +272,7 @@ function fetchEarningsData() {
         mode: 'lines',
         name: 'Quarterly Earnings',
         line: {
-          color: 'rgb(55,128,191)',
+          color: 'rgb(35, 98, 161)',
           width: 1
         }
       };
@@ -224,11 +290,16 @@ function fetchEarningsData() {
       const chartDataCombined = [traceAE, traceQE];
       Plotly.newPlot('myDiv', chartDataCombined, layoutCombined);
     })
+
+
+
+
+
+      
     .catch(error => {
-      console.error('There was a problem with the earnings fetch operation:', error);
+      console.error('There was a problem with fetching quarterly earnings:', error);
     });
 }
-
   </script>
 
 </body>
