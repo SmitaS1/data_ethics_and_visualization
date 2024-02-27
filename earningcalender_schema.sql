@@ -1,12 +1,17 @@
-create table EarningCalender(
-symbol VARCHAR not null,
-name VARCHAR not null,
+Drop table earning_calender;
+
+create table earning_calender(
+symbol VARCHAR,
+name VARCHAR,
 reportDate Date,
 fiscalDate Date,
 estimate Float,
 currency VARCHAR);
 
-select * from earningcalender;
+
+select count(*) from earning_calender;
+
+select * from earning_calender;
 
 
 
