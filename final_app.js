@@ -11,29 +11,33 @@ function fetchCSVData() {
 
 function processData(csvData) {
   // Parse CSV data
-  const rows = csvData.split('\n').slice(1); // Remove header row
+  const rows = csvData.trim().split('\n')//.slice(1); // Remove header row
+  const header = rows.shift(); //this code is added
   const stocks = rows.map(row => {
       const [symbol, name] = row.split(',');
       return { symbol, name };
   });
 
-  // Populate dropdown
-  const dropdown = document.getElementById('selDataset2');
-  stocks.forEach(stock => {
-      const option = document.createElement('option');
-      option.value = stock.symbol;
-      option.textContent = `${stock.name} (${stock.symbol})`;
-      dropdown.appendChild(option);
-  });
-}
+  // Sort stocks array in ascending order based on symbol
+  stocks.sort((a, b) => a.symbol.localeCompare(b.symbol));
 
-function fetchEarningsData() {
-  const selectedOption = document.getElementById('selDataset2').value;
-  const parts = selectedOption.split(' ');
-  const symbolPart = parts[parts.length - 1]; // Extract the last part
-  const symbol = symbolPart.substring(1, symbolPart.length - 1);
-  console.log(symbol);
-  if (!symbol) return; // If no symbol is selected, return
+   // Populate dropdown
+   const dropdown = document.getElementById('selDataset2');
+   stocks.forEach(stock => {
+       const option = document.createElement('option');
+      option.value = stock.symbol;
+      option.textContent = `(${stock.symbol}) ${stock.name}`;
+       dropdown.appendChild(option);
+  });
+ }
+
+ function fetchEarningsData() {
+    const selectedOption = document.getElementById('selDataset2').value;
+    const parts = selectedOption.split(' ');
+    const symbolPart = parts[parts.length - 1]; // Extract the last part
+    const symbol = symbolPart.substring(1, symbolPart.length - 1);
+    console.log(symbol);
+    if (!symbol) return; // If no symbol is selected, return
 
   const apiKey = 'YIVV78G5N35Z9YN0';
   const annualUrl = `https://www.alphavantage.co/query?function=EARNINGS&symbol=${symbol}&apikey=${apiKey}`;
