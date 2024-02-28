@@ -164,7 +164,7 @@ function fetchEarningsData() {
       });
 
       const traceQuarterly = {
-        x: reportedDateQuarterly.map(date => date.substring(0, 4)), // Extracting only the year from the fiscal date ending
+        x: reportedDateQuarterly, // Extracting only the year from the fiscal date ending
         y: reportedEPSQuarterly,
         type: 'bar',
         marker: {
@@ -176,7 +176,7 @@ function fetchEarningsData() {
       const layoutQuarterly = {
         title: 'Quarterly Earnings',
         xaxis: {
-          title: 'Year'
+          title: 'Reported Date'
         },
         yaxis: {
           title: 'Earnings (USD)'
