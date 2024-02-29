@@ -11,8 +11,8 @@ function fetchCSVData() {
 
 function processData(csvData) {
   // Parse CSV data
-  const rows = csvData.trim().split('\n')//.slice(1); // Remove header row
-  const header = rows.shift(); //this code is added
+  const rows = csvData.trim().split('\n') // Remove header row
+  const header = rows.shift(); 
   const stocks = rows.map(row => {
       const [symbol, name] = row.split(',');
       return { symbol, name };
@@ -124,7 +124,7 @@ function processData(csvData) {
               y: reportedEPSQuarterly,
               type: 'bar',
               marker: {
-                  color: 'green'
+                  color: 'Orange'
               },
               text: reportedEPSQuarterly.map(eps => `Reported EPS: ${eps}`)
           };
@@ -227,6 +227,49 @@ Plotly.newPlot('polynomialCurve', chartDataPolynomial, layoutPolynomial);
 
           // Update the content
           regressionResultsDiv.innerHTML = formattedResults;
+
+// Process to create Positive Negative chart for quarterly earnings data
+          const reportedDateQtrly = [];
+          const qtrlysurprise = [];
+          const data2 = []; 
+
+          quarterlyEarnings.forEach(entry => {
+              reportedDateQtrly.push(entry.reportedDate);
+              qtrlysurprise.push(entry.surprise);
+        
+             if (entry.surprise != "None") {
+                  data2.push([parseFloat(entry.surprise)]);
+                     qtrlysurprise.push(parseFloat(entry.surprise));
+              }
+          });
+
+        const textLabels = qtrlysurprise.map(seps => seps >= 0 ? `Positive Surprise EPS ${seps}` : `Negative Surprise EPS ${seps}`);
+        const colors = qtrlysurprise.map(seps => seps >= 0 ? 'green' : 'red'); 
+            const traceQtrly = {
+              x: reportedDateQtrly, // Extracting only the year from the fiscal date ending
+              y: qtrlysurprise,
+              type: 'bar',
+              marker: {
+                  color: colors,
+              },
+              text: textLabels      
+          };
+
+          const layoutQtrly = {
+              title: 'Quarterly Surprise Earnings',
+              xaxis: {
+                  title: 'Reported Date'
+              },
+              yaxis: {
+                  title: 'Surprise Earnings (USD)'
+              },
+             
+          };
+
+         const chartDateQtrly = [traceQtrly];
+            Plotly.newPlot('qtrlySurpriseEarningChart',chartDateQtrly,layoutQtrly);
+// End of process for creating Positive Negative chart
+
         })
 
       .catch(error => {
