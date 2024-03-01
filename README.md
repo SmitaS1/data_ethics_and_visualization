@@ -4,7 +4,7 @@ Project 3 data_ethics_and_visualization
 # Data Visualization Track
 
 # Project Overview : Stock Analysis 
-The objective of the project is to analysis the estimated earnings of the finance institutions based on stock percentange increase/decreased, estimated EPS and reported EPS. 
+The objective of the project is to analyze the Annual and Quaterly Earning Per Share (EPS) in the US stock market and also the difference between the quarterly estimated and reported earnings per share. 
 
 # Project Instructions 
 Pull down the dropdown menu to select stock ticker
