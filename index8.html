@@ -58,19 +58,19 @@
      <!-- Slideshow -->
   <div class="w3-container">
     <div class="w3-display-container mySlides">
-      <img src="" style="width:100%">
+      <img src="image/image (2).png" style="width:30%">
       <div class="w3-display-topleft w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">Bar Chat</span>
       </div>
     </div>
     <div class="w3-display-container mySlides">
-      <img src="" style="width:100%">
+      <img src="image/image.png" style="width:30%">
       <div class="w3-display-middle w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">Line Graph</span>
       </div>
     </div>
     <div class="w3-display-container mySlides">
-      <img src="" style="width:100%">
+      <img src="image/image (1).png" style="width:30%">
       <div class="w3-display-topright w3-container w3-padding-32">
         <span class="w3-white w3-padding-large w3-animate-bottom">Regression</span>
       </div>
@@ -89,47 +89,15 @@
     </div>
   </div>
   
-  <!-- Grid -What We Offer-->
-  <div class="w3-row w3-container" id="Offer">
-    <div class="w3-center w3-padding-64">
-      <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">What We Offer</span>
-    </div>
-    <div class="w3-col l3 m6 w3-light-grey w3-container w3-padding-16">
-      <h3>Annual Earnings</h3>
-      <p></p>
-    </div>
-
-    <div class="w3-col l3 m6 w3-grey w3-container w3-padding-16">
-      <h3>Quarterly Earnings</h3>
-      <p></p>
-    </div>
-
-    <div class="w3-col l3 m6 w3-dark-grey w3-container w3-padding-16">
-      <h3>Quarterly Surprise Earnings</h3>
-      <p></p>
-    </div>
-
-    <div class="w3-col l3 m6 w3-black w3-container w3-padding-16">
-      <h3>Line Chart</h3>
-      <p></p>
-    </div>
-  </div>
-
-  <div class="w3-col l3 m6 w3-black w3-container w3-padding-16">
-    <h3>Regression Analysis Results</h3>
-    <p></p>
-  </div>
-</div>
-
-<div>
-  <div class="w3-center w3-padding-64">
-    <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Select a Stock</span>
-  </div>
-
     <!-- select a stock -->
 
+    <div>
+      <div class="w3-center w3-padding-64">
+        <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Select a Stock</span>
+      </div>
+
         <div class="row">
-          <div class="col-md-7">
+          <div class="col-md-12">
             <div id="data"></div>
             <div class="well">
               <h5>Stock Symbol:</h5>
@@ -142,12 +110,44 @@
         </div>
       </div>
 
+<!-- Grid -What We Offer-->
+<div class="w3-row w3-container" id="Offer">
+  <div class="w3-center w3-padding-64">
+    <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">What We Offer</span>
+  </div>
+  <div class="w3-col l3 m6 w3-light-grey w3-container w3-padding-16">
+    <h4><a href="#AE">Annual Earnings</a></h4>
+    <p></p>
+  </div>
+
+  <div class="w3-col l3 m6 w3-grey w3-container w3-padding-16">
+    <h4><a href="#QE">Quarterly Earnings</a></h4>
+    <p></p>
+  </div>
+
+  <div class="w3-col l3 m6 w3-light-grey w3-container w3-padding-16">
+    <h4><a href="#QSE">Quarterly Surprise Earnings</a></h4>
+    <p></p>
+  </div>
+
+  <div class="w3-col l3 m6 w3-grey w3-container w3-padding-16">
+    <h4><a href="#LC">Line Chart</a></h4>
+    <p></p>
+  </div>
+</div>
+
+<!-- <div class="w3-col l3 m6 w3-black w3-container w3-padding-16">
+  <h4><a href="#RAR">Regression Analysis</a></h4>
+  <p></p>
+</div>
+</div> -->
+
       <!--Graph list-->
 
       <div class="container">
         <div class="row">
-          <div class="col-md-8 text-center">
-            <h3>Annual Earnings:</h3>
+          <div class="col-md-12 text-center">
+            <h3 id="AE">Annual Earnings:</h3>
             <div id="annualEarningsChart"></div>
           </div>
         </div>
@@ -156,7 +156,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
-            <h3>Quarterly Earnings:</h3>
+            <h3 id="QE"> Quarterly Earnings:</h3>
             <div id="quarterlyEarningsChart"></div>
           </div>
         </div>
@@ -164,7 +164,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
-            <h3>Quarterly Surprise Earnings:</h3>
+            <h3 id="QSE">Quarterly Surprise Earnings:</h3>
             <div id="qtrlySurpriseEarningChart"></div>
           </div>
         </div>
@@ -172,7 +172,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
-            <h3>Line Chart:</h3>
+            <h3 id="LC">Line Chart:</h3>
             <div id="myDiv"></div>
           </div>
         </div>
@@ -181,7 +181,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
-            <h3>Regression Analysis Results:</h3>
+            <h3 id="RAR">Regression Analysis Results:</h3>
             <div id="regressionResults"></div>
           </div>
         </div>
@@ -190,7 +190,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
-            <h3>Polynomial Regression Curve:</h3>
+            <h3 id="PRC">Polynomial Regression Curve:</h3>
             <div id="polynomialContainer"></div>
           </div>
         </div>
@@ -208,7 +208,7 @@
 
     <div class="w3-third w3-margin-bottom">
       <div class="w3-card-4">
-        <img src="" alt="Smita" style="width:100%">
+        <img src="image/Image from iOS (2).jpg" alt="Smita" style="width:20%">
         <div class="w3-container">
           <h3>Smita</h3>
           <p class="w3-opacity">Python Developer</p>
@@ -220,7 +220,7 @@
 
     <div class="w3-third w3-margin-bottom">
       <div class="w3-card-4">
-        <img src="" alt="Lee" style="width:100%">
+        <img src="image/Pro Pic.JPG" alt="Lee" style="width:20%">
         <div class="w3-container">
           <h3>Lee</h3>
           <p class="w3-opacity">JavaScript Developer</p>
@@ -232,7 +232,7 @@
 
     <div class="w3-third w3-margin-bottom">
       <div class="w3-card-4">
-        <img src="" alt="Ipsita" style="width:100%">
+        <img src="image/ippic.jpeg" alt="Ipsita" style="width:20%">
         <div class="w3-container">
           <h3>Ipsita</h3>
           <p class="w3-opacity">UI/UX Designer</p>

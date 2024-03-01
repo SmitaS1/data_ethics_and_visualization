@@ -28,10 +28,15 @@ Instructions on how to use and interact with the project
 
 At least one paragraph summarizing efforts for ethical considerations made in the project
 
-References for the data source(s)
+# References for the data source(s)
 [API Documentation | Alpha Vantage](https://www.alphavantage.co/documentation/)
 
-References for any code used that is not your own
+# References for any code used that is not your own
+https://www.w3schools.com/
+
+https://stackoverflow.com/
+
+https://www.jsdelivr.com/package/npm/regression
 
 3 Visualization 
 
