@@ -186,6 +186,10 @@ const polynomialDiv = document.createElement('div');
 polynomialDiv.id = 'polynomialCurve';
 document.body.appendChild(polynomialDiv);
 
+const container = document.getElementById('polynomialContainer');
+container.appendChild(polynomialDiv);
+
+
 // Plot the polynomial regression curve
 const xValues = data1.map(point => point[0]);
 const yValues = xValues.map(x => {
