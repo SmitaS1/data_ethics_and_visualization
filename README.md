@@ -40,6 +40,8 @@ line_chart
 
 * Data is stored in PostgreSQL
 
+![table_script_image.png](./table_script_image.png)
+
 ![earning_calender_database.png](./earning_calender_database.png)
 
 ![ticker_database](./ticker_database.png)
@@ -60,13 +62,6 @@ https://www.jsdelivr.com/package/npm/regression
 
 
 6. Your project must include some level of user-driven interaction, such as:
-
-![data_ethics_and_visualization_webpage.png](./data_ethics_and_visualization_webpage.png)
-
-![who_we_are.png](./who_we_are.png)
-
-
-* HTML menus, dropdowns, and/or textboxes to display JavaScript-powered visualizations
 
 * Flask backend with interactive API routes that serve back Python or JavaScript created plots
 
