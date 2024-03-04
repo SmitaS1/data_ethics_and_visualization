@@ -2,23 +2,28 @@ import csv
 import requests
 import os
 
-# replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
-#CSV_URL = 'https://www.alphavantage.co/query?function=EARNINGS_CALENDAR&horizon=3month&apikey=8X7UWGNWWHENH3JF'
-Eearningurl= 'https://www.alphavantage.co/query?function=EARNINGS&symbol=WMK&apikey=24B0JWGHHKVJZPXU'
-with requests.Session() as s:
-    #download = s.get(CSV_URL)
-    download = s.get(Eearningurl)
-    decoded_content = download.content.decode('utf-8')
-    cr = csv.reader(decoded_content.splitlines(), delimiter=',')
-    my_list = list(cr)
-    for row in my_list:
-        print(row)
+# Replace 'demo' with your actual Alpha Vantage API key
+API_KEY = 'YOUR_API_KEY'
+CSV_URL = f'https://www.alphavantage.co/query?function=EARNINGS_CALENDAR&horizon=3month&apikey=8X7UWGNWWHENH3JF'
 
-# save the output file path
-    output_file = os.path.join("D:\OneDrive\Desktop\Work\python\RBCDS\Challenge\Second-half\Project 3\CalendarEarning.csv")
+# Perform the request and handle potential errors
+try:
+    with requests.Session() as s:
+        response = s.get(CSV_URL)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        decoded_content = response.content.decode('utf-8')
+except requests.RequestException as e:
+    print(f"Error occurred during request: {e}")
+    exit(1)  # Exit the script with a non-zero status code to indicate failure
 
-# open the output file, create a header row, and then write the zipped object to the csv
-    with open(output_file, "w", newline='') as datafile:
-        writer = csv.writer(datafile)
+# Parse the CSV content
+cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+my_list = list(cr)
 
-        writer.writerows(my_list)
+# Save the output file
+output_file = "output.csv"  # Save in the same directory as the script
+with open(output_file, "w", newline='') as datafile:
+    writer = csv.writer(datafile)
+    writer.writerows(my_list)
+
+print(f"Output saved to {output_file}")
