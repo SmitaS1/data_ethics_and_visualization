@@ -87,7 +87,7 @@ https://www.w3schools.com/
 
 https://stackoverflow.com/
 
-8. The final website showing individual type of chart or all charts for the selected ticker (from the drop down list box)
+9. The final website showing individual type of chart or all charts for the selected ticker (from the drop down list box)
 
 ![data_ethics_and_visualization_webpage.png](./data_ethics_and_visualization_webpage.png)
 
