@@ -52,7 +52,7 @@ https://www.jsdelivr.com/package/npm/regression
 
 4. Your project must be powered by a dataset with at least 100 records.
 
-![row_count.png](./row_copunt.png)
+![row_count.png](./row_count.png)
 ![ticker_rows.png](./ticker_rows.png)
 
 
