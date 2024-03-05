@@ -4,7 +4,7 @@
 
 ### Project Overview : 
 
-* Finance : Stock Analysis 
+* Finance Domain : Stock Analysis 
 The objective of the project is to analyze the Annual and Quaterly Earning Per Share (EPS) in the US stock market-traded stock and also the comparision between the quarterly estimated and reported earnings per share. 
 
 
@@ -92,6 +92,13 @@ https://stackoverflow.com/
 ![data_ethics_and_visualization_webpage.png](./data_ethics_and_visualization_webpage.png)
 
 ![who_we_are.png](./who_we_are.png)
+
+### Analysis/Conclusion : 
+Earning Per Share (EPS)  serves as a fundamental tool for investors to assess a company's financial health, profitability, growth prospects, and valuation, helping them make informed investment decisions. However, our project is consider EPS as the main financial metrics  to gain a comprehensive understanding of a company's performance and prospects. 
+There are further scope to expand this project to provide addition analysys to visulize the market data.
+By incorporating additional analyses and visualizations, the project can provide investors with a more comprehensive and actionable view of market data, helping them make better-informed investment decisions.
+
+
 
 
 
